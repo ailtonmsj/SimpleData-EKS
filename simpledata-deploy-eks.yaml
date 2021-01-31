@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: simple-data
-        image: ailtonmsj/simpledata:v1
+        image: ailtonmsj/simpledata:v2
         ports:
         - containerPort: 8080
 ---
