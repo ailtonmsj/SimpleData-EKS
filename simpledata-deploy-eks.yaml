@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,6 +18,7 @@ spec:
         image: ailtonmsj/simpledata:v2
         ports:
         - containerPort: 8080
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -33,3 +35,22 @@ spec:
   #type: NodePort
   # to use EKS use the type "LoadBalancer"
   type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caller-simple-data
+spec:
+  selector:
+    matchLabels:
+      app: caller-simple-data
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: caller-simple-data
+    spec:
+      containers:
+      - name: caller-simple-data
+        image: ailtonmsj/callersimpledata:v1
+        imagePullPolicy: Always
